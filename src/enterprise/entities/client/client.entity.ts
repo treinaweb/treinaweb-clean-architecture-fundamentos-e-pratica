@@ -9,6 +9,7 @@ export class Client {
     this._lastName = lastName;
     this._email = email;
     this._cpf = cpf;
+    this.validate();
   }
 
   get firstName(): string {
@@ -25,5 +26,19 @@ export class Client {
 
   get cpf(): string {
     return this._cpf;
+  }
+
+  private validate() {
+    if (this._firstName.length < 3) {
+      throw new Error("Ivalid firstName");
+    }
+
+    if (!this._firstName.match("^([a-zA-Z]+)$")) {
+      throw new Error("Ivalid firstName");
+    }
+
+    if (this._lastName.length < 3) {
+      throw new Error("Ivalid lastName");
+    }
   }
 }
