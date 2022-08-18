@@ -1,44 +1,33 @@
+import { ClientName } from "./client-name.valueobject";
+import { Cpf } from "../cpf.valueobject";
+import { Email } from "../email.valueobject";
+
 export class Client {
-  private _firstName: string;
-  private _lastName: string;
-  private _email: string;
-  private _cpf: string;
+  private _firstName: ClientName;
+  private _lastName: ClientName;
+  private _email: Email;
+  private _cpf: Cpf;
 
   constructor(firstName: string, lastName: string, email: string, cpf: string) {
-    this._firstName = firstName;
-    this._lastName = lastName;
-    this._email = email;
-    this._cpf = cpf;
-    this.validate();
+    this._firstName = new ClientName(firstName);
+    this._lastName = new ClientName(lastName);
+    this._email = new Email(email);
+    this._cpf = new Cpf(cpf);
   }
 
   get firstName(): string {
-    return this._firstName;
+    return this._firstName.value;
   }
 
   get lastName(): string {
-    return this._lastName;
+    return this._lastName.value;
   }
 
   get email(): string {
-    return this._email;
+    return this._email.value;
   }
 
   get cpf(): string {
-    return this._cpf;
-  }
-
-  private validate() {
-    if (this._firstName.length < 3) {
-      throw new Error("Ivalid firstName");
-    }
-
-    if (!this._firstName.match("^([a-zA-Z]+)$")) {
-      throw new Error("Ivalid firstName");
-    }
-
-    if (this._lastName.length < 3) {
-      throw new Error("Ivalid lastName");
-    }
+    return this._cpf.value;
   }
 }
