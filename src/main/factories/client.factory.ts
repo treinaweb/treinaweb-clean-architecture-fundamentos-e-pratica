@@ -4,8 +4,13 @@ import { FindAllClientsUseCase } from "../../application/usecases/client/find-al
 import { FindAllClientsController } from "../../infra/controllers/client/find-all-clients.controller";
 
 export class ClientFactory {
+  private static _clientGatewayInstance: ClientGateway;
+
   public static getClientGateway(): ClientGateway {
-    return new ClientInMemoryGateway();
+    if (!this._clientGatewayInstance) {
+      this._clientGatewayInstance = new ClientInMemoryGateway();
+    }
+    return this._clientGatewayInstance;
   }
 
   public static getFindAllClientsUseCase(): FindAllClientsUseCase {

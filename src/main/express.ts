@@ -11,6 +11,14 @@ app.get("/api/clients", async (req: Request, res: Response) => {
   res.status(response.statusCode).json(response.body);
 });
 
+app.get("/api/clientsv2", async (req: Request, res: Response) => {
+  const controller = ClientFactory.getFindAllClientsController();
+
+  const response = await controller.execute({ body: {} });
+
+  res.status(response.statusCode).json(response.body);
+});
+
 app.listen(3000, () => {
   console.log("Servidor express inciado na porta 3000");
 });
