@@ -1,14 +1,10 @@
 import express, { Response, Request } from "express";
-import { FindAllClientsController } from "../infra/controllers/client/find-all-clients.controller";
-import { FindAllClientsUseCase } from "../application/usecases/client/find-all-clients.usecase";
-import { ClientInMemoryGateway } from "../infra/gateways/client/client-inmemory.gateway";
+import { ClientFactory } from "./factories/client.factory";
 
 const app = express();
 
 app.get("/api/clients", async (req: Request, res: Response) => {
-  const gateway = new ClientInMemoryGateway();
-  const usecase = new FindAllClientsUseCase(gateway);
-  const controller = new FindAllClientsController(usecase);
+  const controller = ClientFactory.getFindAllClientsController();
 
   const response = await controller.execute({ body: {} });
 

@@ -1,7 +1,5 @@
 import Hapi, { Request, ResponseToolkit } from "@hapi/hapi";
-import { ClientInMemoryGateway } from "../infra/gateways/client/client-inmemory.gateway";
-import { FindAllClientsUseCase } from "../application/usecases/client/find-all-clients.usecase";
-import { FindAllClientsController } from "../infra/controllers/client/find-all-clients.controller";
+import { ClientFactory } from "./factories/client.factory";
 
 const init = async () => {
   const server = Hapi.server({
@@ -13,9 +11,7 @@ const init = async () => {
     method: "GET",
     path: "/api/clients",
     handler: async (request: Request, h: ResponseToolkit, err?: Error) => {
-      const gateway = new ClientInMemoryGateway();
-      const usecase = new FindAllClientsUseCase(gateway);
-      const controller = new FindAllClientsController(usecase);
+      const controller = ClientFactory.getFindAllClientsController();
 
       const response = await controller.execute({ body: {} });
 
