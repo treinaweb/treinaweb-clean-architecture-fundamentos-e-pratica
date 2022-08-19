@@ -1,16 +1,16 @@
 import { ClientGateway } from "../../application/gateways/client/client.gateway";
-import { ClientInMemoryGateway } from "../../infra/gateways/client/client-inmemory.gateway";
 import { FindAllClientsUseCase } from "../../application/usecases/client/find-all-clients.usecase";
 import { FindAllClientsController } from "../../infra/controllers/client/find-all-clients.controller";
 import { CreateClientUseCase } from "../../application/usecases/client/create-client.usecase";
 import { CreateClientController } from "../../infra/controllers/client/create-client.controller";
+import { ClientMySqlGateway } from "../../infra/gateways/client/client-mysql.gateway";
 
 export class ClientFactory {
   private static _clientGatewayInstance: ClientGateway;
 
   public static getClientGateway(): ClientGateway {
     if (!this._clientGatewayInstance) {
-      this._clientGatewayInstance = new ClientInMemoryGateway();
+      this._clientGatewayInstance = new ClientMySqlGateway();
     }
     return this._clientGatewayInstance;
   }
