@@ -1,5 +1,6 @@
-import Hapi, { Request, ResponseToolkit } from "@hapi/hapi";
+import Hapi from "@hapi/hapi";
 import { ClientFactory } from "./factories/client.factory";
+import { HapiAdapter } from "./adapters/hapi.adapter";
 
 const init = async () => {
   const server = Hapi.server({
@@ -10,13 +11,7 @@ const init = async () => {
   server.route({
     method: "GET",
     path: "/api/clients",
-    handler: async (request: Request, h: ResponseToolkit, err?: Error) => {
-      const controller = ClientFactory.getFindAllClientsController();
-
-      const response = await controller.execute({ body: {} });
-
-      return h.response(response.body).code(response.statusCode);
-    },
+    handler: HapiAdapter.adapt(ClientFactory.getFindAllClientsController()),
   });
 
   await server.start();
