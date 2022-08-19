@@ -15,4 +15,11 @@ export class ClientInMemoryGateway implements ClientGateway {
     );
     return clonedClients;
   }
+
+  async create(client: Client): Promise<void> {
+    ClientInMemoryGateway.clients.push(
+      new Client(client.firstName, client.lastName, client.email, client.cpf)
+    );
+    return Promise.resolve();
+  }
 }

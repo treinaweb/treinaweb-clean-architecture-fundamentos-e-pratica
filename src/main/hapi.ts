@@ -14,6 +14,12 @@ const init = async () => {
     handler: HapiAdapter.adapt(ClientFactory.getFindAllClientsController()),
   });
 
+  server.route({
+    method: "POST",
+    path: "/api/clients",
+    handler: HapiAdapter.adapt(ClientFactory.getCreateClientController()),
+  });
+
   await server.start();
 };
 
