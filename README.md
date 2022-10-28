@@ -1,4 +1,4 @@
-# TreinaWeb: Curso "Clean Archtecture - Fundamentos e Prática"
+# TreinaWeb: Curso "Clean Architecture - Fundamentos e Prática"
 
 ## Lista de Commits
 
